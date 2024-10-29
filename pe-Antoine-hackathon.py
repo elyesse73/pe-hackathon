@@ -134,7 +134,7 @@ df.head()
 
 # +
 #histogramme sur l'année de découverte
-
+#voir version Nathan pour une autre résolution
 # Créer un histogramme
 plt.figure(figsize=(10, 6))
 plt.hist(df['annee'], bins=df['annee'].nunique(), color='blue', edgecolor='black', alpha=0.7)
