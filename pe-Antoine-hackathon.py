@@ -49,7 +49,7 @@ plt.yscale('log')
 # Ajouter des labels et un titre
 plt.xlabel('Orbital period (days)')
 plt.ylabel('Planet Radius [earth radius]')
-plt.title('Graphique en échelle logarithmique')
+plt.title('Planet Radius vs Orbital period')
 plt.legend()
 plt.grid(True)
 
@@ -71,7 +71,7 @@ plt.yscale('log')
 # Ajouter des labels et un titre
 plt.xlabel('Orbital period (days)')
 plt.ylabel('Planet Mass or Mass*sin(i) [jupyter mass]')
-plt.title('Graphique en échelle logarithmique')
+plt.title('Planet Mass vs Orbital Period')
 plt.legend()
 plt.grid(True)
 
@@ -95,7 +95,7 @@ plt.yscale('log')
 # Ajouter des labels et un titre
 plt.xlabel('Orbital period (days)')
 plt.ylabel('Insolation Flux [Earth flux]')
-plt.title('Graphique en échelle logarithmique')
+plt.title('Insolation Flux vs Orbital period')
 plt.legend()
 plt.grid(True)
 
@@ -119,7 +119,7 @@ plt.xscale('log')
 # Ajouter des labels et un titre
 plt.xlabel('Orbital period (days)')
 plt.ylabel('Eccentricity')
-plt.title('Ecentricity en fonction de la période orbite')
+plt.title('Ecentricity in fonction of Orbital period')
 plt.legend()
 plt.grid(True)
 
@@ -143,7 +143,7 @@ plt.hist(df['annee'], bins=df['annee'].nunique(), color='blue', edgecolor='black
 # Ajouter des labels et un titre
 plt.xlabel('Valeurs')
 plt.ylabel('Fréquence')
-plt.title('')
+plt.title('découverte en fonction des années')
 
 # Afficher la grille
 plt.grid(axis='y')
@@ -161,9 +161,34 @@ df.pivot_table(index='categorierade', columns='pl_insol', aggfunc='count')
 
 
 
+# Loi de Kepler 
 
+df3 = df[["pl_orbsmax","pl_orbper","pl_bmasse"]]
+T = df3["pl_orbper"]
+a = df3["pl_orbsmax"]
+G = 6.67430/(10**11)
+M = df3["pl_bmasse"]
+df3["Kepler"] = (T/86400)**2/(a*149597870700)**3
+df3.head()
 
+X = 4*np.pi**2/(G*df3["pl_bmasse"]*5.972*(10**24))
+Y = df3["Kepler"]
+plt.scatter(X,Y)
+plt.axis('equal')
+# Ajouter des labels et un titre
+plt.xlabel('Mass')
+plt.ylabel('Kepler : T**2/a**3')
+plt.title('Vérification de la loi de Kepler')
+plt.show()
 
+#Conservation de l'énergie
+
+X = df["pl_insol"]
+Y = df["pl_orbsmax"]**2
+plt.scatter(X,Y)
+plt.xlabel('insolation')
+plt.ylabel('distance à son étoile')
+plt.title("Conservation de l'énergie")
 
 
 
