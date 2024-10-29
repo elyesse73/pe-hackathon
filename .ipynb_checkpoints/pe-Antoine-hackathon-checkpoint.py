@@ -8,7 +8,7 @@ fichier = "PS_2024.10.29_06.17.42.csv"
 
 df = pd.read_csv(fichier, skiprows = 96)
 df.head()
-df.drop_duplicates(subset=["pl_name"], keep="last")
+
 #cohérence types
 df.dtypes
 
