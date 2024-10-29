@@ -19,11 +19,17 @@ T = df3["pl_orbper"]
 a = df3["pl_orbsmax"]
 G = 6.67430/(10**11)
 M = df3["pl_bmasse"]
-df3["Kepler"] = (2*a*149597870700)**3/(T/86400)**2
+df3["Kepler"] = (T/86400)**2/(a*149597870700)**3
 df3.head()
 
-X = 4*np.pi**2/(G*df3["pl_bmasse"]*5.972*10**24)
+X = 4*np.pi**2/(G*df3["pl_bmasse"]*5.972*(10**24))
 Y = df3["Kepler"]
+plt.scatter(X,Y)
+plt.axis('equal')
+plt.show();
+
+X = df2["pl_insol"]
+Y = df2["pl_orbsmax"]**2
 plt.scatter(X,Y);
 
 
